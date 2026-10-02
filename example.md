@@ -16,10 +16,12 @@ Every sigil, in several contexts. Each scene shows the aphone, then how it reads
 | `a -> b` | `@log -> root cause` | `@notes -> outline` | `ideas -> top 3` |
 | `a + b` | `tests + docs` | `tighten + retitle` | `@sam + @ana` |
 | `a \| b` | `fix \| flag` | `trim \| cut` | `tue \| wed` |
+| `a; b` | `lang: ts; !any` | `len: 300w; !emoji` | `due: fri; owner?` |
 | `~x` | `~O(n)` | `~Didion` | `~2 wks` |
 | `!x` | `!@tests` | `!adverbs` | `!weekends` |
 | `x?` | `node-version?` | `audience?` | `owner?` |
 | `(x)` | `(if CI green)` | `(keep the joke)` | `(after launch)` |
+| `[x]` | `[lint + test] -> CI` | `[intro + outro] ~Didion` | `[tue \| wed] (pm)` |
 | `{x}` | `GET /{endpoint}` | `Dear {name},` | `book {venue}` |
 | `"x"` `` `x` `` | `` `--force` `` | `"Ship it."` | `"no meetings"` |
 | `<t>…</t>` | `<log>…</log>` | `<draft>…</draft>` | `<notes>…</notes>` |
@@ -108,7 +110,7 @@ draft email to {name}
 #launch plan, due: oct 30
   copy + screenshots -> @ana
   pricing page -> @sam (after legal signs off)
-    tiers? 2 | 3
+    tiers: [2 | 3]?
   !weekend-deploys
 @launch.owner?
 ```
@@ -141,6 +143,22 @@ The orders endpoint paginates by offset; p95 is 2.4s at page 400.
 ```
 
 **Reads:** Context: the orders endpoint pages by offset and p95 hits 2.4s at page 400. Perf agent: move api/orders.ts to cursor pagination. Keep the response shape exactly as written. No breaking changes; v1 clients are still live. Report back with the diff and p95 before and after.
+
+
+## Grouping
+
+Operators bind as in code, tight to loose: attached sigils, `.`, `+`, `|`, `->`, `=` `:`, `;`. Brackets override.
+
+```text
+review @src/auth.ts -> issues + fixes
+tests + [@notes -> outline]
+[@sam | @ana] + @lee
+tiers: [2 | 3]?
+tiers: 2 | 3?
+len: ~300w; tone: dry; !emoji
+```
+
+**Reads:** Line by line. Review auth.ts into issues and fixes: `+` binds before `->`, so no bracket is needed. Write tests, and turn the notes into an outline: without the bracket it would read "turn tests and notes into an outline". Lee, plus one of Sam or Ana: without the bracket `+` binds first, giving "Sam, or Ana-and-Lee". Two tiers or three, undecided. Two tiers, or maybe three. Three settings on one line.
 
 
 ## Too much
